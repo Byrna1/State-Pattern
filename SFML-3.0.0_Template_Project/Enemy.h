@@ -2,6 +2,7 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "TextureManager.h"
+#include "EnemyAIStates.h"
 
 using namespace std;
 
@@ -23,14 +24,23 @@ class Enemy
 		spr.setScale(sf::Vector2f(2, 2));
 		return spr;
 	}
+	EnemyState* state;
+
 public:
 	Enemy(const vector<sf::Vector2f> patrol, float visibilityRadius, float speed, float idleTime) : 
 		spr(initAssets()), patrol(patrol), visibilityRadius(visibilityRadius), speed(speed), idleTime(idleTime)
 	{
+		state = new IdleState(*this);
 	}
 	void update(float dt, const sf::Vector2f& playerPos)
 	{
-		position = patrol[0];
+		// update the state
+		EnemyState* newState = state->update(dt, playerPos);
+		if (newState != nullptr)
+		{
+			delete state;
+			state = newState;
+		}
 	}
 	void draw(sf::RenderWindow& window)
 	{

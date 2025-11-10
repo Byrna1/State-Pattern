@@ -4,6 +4,8 @@
 
 class PatrolState : public EnemyState
 {
+    int nextWaypoint;
+    int direction;
 public:
     PatrolState(Enemy& owner);
     EnemyState* update(float dt, const sf::Vector2f& playerPos) override;
@@ -11,6 +13,7 @@ public:
 
 class IdleState : public EnemyState
 {
+    float idleTimer;
 public:
     IdleState(Enemy& owner);
     EnemyState* update(float dt, const sf::Vector2f& playerPos) override;
