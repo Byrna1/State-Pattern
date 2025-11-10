@@ -1,0 +1,6 @@
+SFML demo assets
+
+cat - https://comigo.itch.io/
+font https://www.fontspace.com/bubbleboddy-font-f24700
+
+other assets - https://kenney.nl/assets
